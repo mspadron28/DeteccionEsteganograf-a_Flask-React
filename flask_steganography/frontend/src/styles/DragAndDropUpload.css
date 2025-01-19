@@ -1,0 +1,75 @@
+.upload-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.drag-drop-zone {
+  border: 2px dashed #007bff;
+  border-radius: 10px;
+  padding: 3rem;
+  text-align: center;
+  background-color: #f4f7fa;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drag-drop-zone.dragging {
+  background-color: #e0f7ff;
+  border-color: #0056b3;
+}
+
+.drag-drop-content {
+  font-size: 18px;
+  color: #333;
+}
+
+.icon-placeholder {
+  font-size: 50px;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.supported-formats {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+.custom-file-upload:hover {
+  background-color: #5d92d8 ;
+}
+
+.file-name {
+  margin-top: 1rem;
+  font-size: 16px;
+  color: #333;
+}
+
+.upload-button {
+  margin-top: 1.5rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #218838;
+}
+#file-upload {
+  display: none;
+}

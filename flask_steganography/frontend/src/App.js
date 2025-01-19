@@ -1,25 +1,37 @@
-import React from 'react';
-import './styles/App.css'; // Importa los estilos
-import ImageGrid from './components/ImageGrid'; // Componente para mostrar imágenes
-import UploadButton from './components/UploadButton'; // Componente para cargar imágenes
+import React, { useState } from 'react';
+import './styles/App.css';
+import ImageGrid from './components/ImageGrid';
+import DragAndDropUpload from './components/DragAndDropUpload';
+import Toast from './components/Toast';
 
 function App() {
+  const [toast, setToast] = useState(null); // Estado para manejar notificaciones
+
+  const showToast = (message, type) => {
+    setToast({ message, type });
+
+    // Ocultar el toast automáticamente después de 5 segundos
+    setTimeout(() => {
+      setToast(null);
+    }, 5000);
+  };
+
   return (
     <div className="App">
-      {/* Header */}
       <header className="App-header">
         <h1>Repositorio de Imágenes 100% Seguras</h1>
         <p>Garantizamos que tus imágenes están libres de esteganografía</p>
       </header>
-
-      {/* Botón para cargar imágenes */}
-      <div className="Upload-section">
-        <UploadButton />
-      </div>
-
-      {/* Grid de imágenes */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+      <DragAndDropUpload refreshImages={() => {}} showToast={showToast} />
       <main>
-        <ImageGrid />
+        <ImageGrid refreshImages={() => {}} showToast={showToast} />
       </main>
     </div>
   );

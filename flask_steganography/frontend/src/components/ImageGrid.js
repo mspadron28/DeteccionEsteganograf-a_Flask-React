@@ -1,48 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
+import Toast from './Toast'; // Importar el componente Toast
+import '../styles/ImageGrid.css'; // Estilos personalizados
 
-function ImageGrid() {
+function ImageGrid({ refreshImages }) {
   const [images, setImages] = useState([]);
+  const [toast, setToast] = useState(null); // Estado para manejar el mensaje de notificación
 
-  // Función para cargar las imágenes
-  const fetchImages = () => {
+  // Envolver showToast en useCallback
+  const showToast = useCallback((message, type) => {
+    setToast({ message, type });
+
+    // Ocultar el toast automáticamente después de 5 segundos
+    setTimeout(() => {
+      setToast(null);
+    }, 5000);
+  }, []);
+
+  // Definir fetchImages con useCallback
+  const fetchImages = useCallback(() => {
     axios.get('http://127.0.0.1:5000/api/images')
-      .then(response => setImages(response.data))
-      .catch(error => console.error(error));
-  };
+      .then((response) => setImages(response.data))
+      .catch(() => showToast('Error al cargar las imágenes.', 'error'));
+  }, [showToast]); // Agregar showToast como dependencia
 
-  // Función para eliminar una imagen
   const deleteImage = (imageId) => {
+
+
     axios.delete(`http://127.0.0.1:5000/api/delete/${imageId}`)
       .then(() => {
-        alert('Imagen eliminada correctamente.');
-        fetchImages(); // Recargar la lista de imágenes
+        showToast('Imagen eliminada correctamente.', 'success');
+        refreshImages(); // Actualizar el grid
       })
-      .catch(error => {
-        console.error(error);
-        alert('Error al eliminar la imagen.');
-      });
+      .catch(() => showToast('Error al eliminar la imagen.', 'error'));
   };
 
-  // Cargar imágenes al cargar el componente
   useEffect(() => {
     fetchImages();
-  }, []);
+  }, [fetchImages]); // Agregar fetchImages como dependencia
 
   return (
     <div className="grid">
-      {images.map(image => (
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+      {images.map((image) => (
         <div className="card" key={image.id}>
-          <img src={`http://127.0.0.1:5000/uploads/${image.filename}`} alt={image.filename} />
+          <img
+            src={`http://127.0.0.1:5000/uploads/${image.filename}`}
+            alt={image.filename}
+            className="card-image"
+          />
           <div className="card-body">
-            <h5>{image.filename}</h5>
-            {image.is_safe ? (
-              <p className="safe">✔ 100% confiable: Sin esteganografía</p>
-            ) : (
-              <p className="unsafe">✖ No confiable</p>
-            )}
+            <h5 className="card-title">{image.filename}</h5>
+            <p className={image.is_safe ? 'safe' : 'unsafe'}>
+              {image.is_safe ? '✔ 100% confiable: Sin esteganografía' : '✖ No confiable'}
+            </p>
             <button
-              className="btn btn-danger"
+              className="delete-button"
               onClick={() => deleteImage(image.id)}
             >
               Eliminar
