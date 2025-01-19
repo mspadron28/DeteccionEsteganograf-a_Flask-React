@@ -3,7 +3,7 @@ import axios from 'axios';
 import Toast from './Toast'; // Importar el componente Toast
 import '../styles/ImageGrid.css'; // Estilos personalizados
 
-function ImageGrid({ refreshImages }) {
+function ImageGrid() {
   const [images, setImages] = useState([]);
   const [toast, setToast] = useState(null); // Estado para manejar el mensaje de notificación
 
@@ -25,12 +25,12 @@ function ImageGrid({ refreshImages }) {
   }, [showToast]); // Agregar showToast como dependencia
 
   const deleteImage = (imageId) => {
-
-
     axios.delete(`http://127.0.0.1:5000/api/delete/${imageId}`)
       .then(() => {
         showToast('Imagen eliminada correctamente.', 'success');
-        refreshImages(); // Actualizar el grid
+
+        // Refrescar la página después de eliminar una imagen
+        window.location.reload();
       })
       .catch(() => showToast('Error al eliminar la imagen.', 'error'));
   };
