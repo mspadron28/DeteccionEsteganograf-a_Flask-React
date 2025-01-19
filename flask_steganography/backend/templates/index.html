@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Esteganografía</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Detección de Esteganografía</h1>
+        <form action="/" method="POST" enctype="multipart/form-data" class="mt-4">
+            <div class="mb-3">
+                <label for="file" class="form-label">Selecciona un archivo para analizar:</label>
+                <input class="form-control" type="file" id="file" name="file" accept=".png,.jpg,.jpeg,.exe" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Analizar archivo</button>
+        </form>
+
+        {% if result %}
+        <div class="alert alert-info mt-4">
+            <strong>Resultado del análisis:</strong>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

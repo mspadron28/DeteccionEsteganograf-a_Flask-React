@@ -1,0 +1,67 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+instance/
+uploads/
+
+# Flask environment
+*.env
+*.venv
+env/
+venv/
+ENV/
+env.bak/
+*.sqlite3
+
+# Logs and debugging
+*.log
+*.pid
+*.out
+*.err
+debug.log
+
+# Python IDE files
+.vscode/
+*.idea/
+
+# Node.js
+/flask_steganography/frontend/node_modules
+/flask_steganography/frontend/.pnp
+/flask_steganography/frontend/.pnp.js
+
+# Logs
+/flask_steganography/frontend/npm-debug.log*
+/flask_steganography/frontend/yarn-debug.log*
+/flask_steganography/frontend/yarn-error.log*
+
+# Build and static files
+/flask_steganography/frontend/build/
+/flask_steganography/frontend/dist/
+/flask_steganography/frontend/public/static/
+/flask_steganography/frontend/.next/
+/flask_steganography/frontend/out/
+
+# Cache files
+/flask_steganography/frontend/.cache/
+/flask_steganography/frontend/cache/
+
+# Temporary files
+.DS_Store
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.save
+
+# Coverage
+/flask_steganography/frontend/coverage/
+/flask_steganography/frontend/.nyc_output
+
+# Misc
+/flask_steganographyfrontend/.env.local
+/flask_steganographyfrontend/.env.development.local
+/flask_steganographyfrontend/.env.test.local
+/flask_steganographyfrontend/.env.production.local
