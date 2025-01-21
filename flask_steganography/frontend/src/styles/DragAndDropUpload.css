@@ -3,60 +3,44 @@
   margin-top: 20px;
 }
 
-.drag-drop-zone {
-  border: 2px dashed #007bff;
-  border-radius: 10px;
-  padding: 3rem;
-  text-align: center;
-  background-color: #f4f7fa;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.drag-drop-zone.dragging {
-  background-color: #e0f7ff;
-  border-color: #0056b3;
-}
-
-.drag-drop-content {
+.start-upload-button {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
   font-size: 18px;
-  color: #333;
+  margin-bottom: 20px;
 }
 
-.icon-placeholder {
-  font-size: 50px;
-  color: #007bff;
-  margin-bottom: 1rem;
+.upload-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
-.supported-formats {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 1rem;
+.upload-box {
+  width: 45%;
+  text-align: center;
 }
 
 .custom-file-upload {
   display: inline-block;
   background-color: #007bff;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.5rem;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 1rem;
-}
-
-.custom-file-upload:hover {
-  background-color: #5d92d8 ;
-}
-
-.file-name {
-  margin-top: 1rem;
-  font-size: 16px;
-  color: #333;
 }
 
 .upload-button {
-  margin-top: 1.5rem;
+  margin-top: 20px;
   background-color: #28a745;
   color: white;
   border: none;
@@ -64,12 +48,52 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
-  transition: background-color 0.3s ease;
 }
 
-.upload-button:hover {
-  background-color: #218838;
+.analysis-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
-#file-upload {
-  display: none;
+
+.analysis-box {
+  width: 45%;
+  text-align: center;
+}
+
+.analysis-image {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.result-message {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.result-message.success {
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.result-message.error {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+#stego-upload {
+  display: none; /* Oculta el input de tipo file */
+}
+
+#original-upload{
+  display: none; /* Oculta el input de tipo file */
 }

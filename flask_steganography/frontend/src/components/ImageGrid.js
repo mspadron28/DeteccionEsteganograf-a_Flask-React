@@ -1,43 +1,37 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import Toast from './Toast'; // Importar el componente Toast
-import '../styles/ImageGrid.css'; // Estilos personalizados
+import Toast from './Toast';
+import '../styles/ImageGrid.css';
 
 function ImageGrid() {
   const [images, setImages] = useState([]);
-  const [toast, setToast] = useState(null); // Estado para manejar el mensaje de notificación
+  const [toast, setToast] = useState(null);
 
-  // Envolver showToast en useCallback
   const showToast = useCallback((message, type) => {
     setToast({ message, type });
-
-    // Ocultar el toast automáticamente después de 5 segundos
     setTimeout(() => {
       setToast(null);
     }, 5000);
   }, []);
 
-  // Definir fetchImages con useCallback
   const fetchImages = useCallback(() => {
     axios.get('http://127.0.0.1:5000/api/images')
       .then((response) => setImages(response.data))
       .catch(() => showToast('Error al cargar las imágenes.', 'error'));
-  }, [showToast]); // Agregar showToast como dependencia
+  }, [showToast]);
 
   const deleteImage = (imageId) => {
     axios.delete(`http://127.0.0.1:5000/api/delete/${imageId}`)
       .then(() => {
         showToast('Imagen eliminada correctamente.', 'success');
-
-        // Refrescar la página después de eliminar una imagen
-        window.location.reload();
+        fetchImages(); // Refrescar la lista después de eliminar
       })
       .catch(() => showToast('Error al eliminar la imagen.', 'error'));
   };
 
   useEffect(() => {
     fetchImages();
-  }, [fetchImages]); // Agregar fetchImages como dependencia
+  }, [fetchImages]);
 
   return (
     <div className="grid">
@@ -57,8 +51,10 @@ function ImageGrid() {
           />
           <div className="card-body">
             <h5 className="card-title">{image.filename}</h5>
-            <p className={image.is_safe ? 'safe' : 'unsafe'}>
-              {image.is_safe ? '✔ 100% confiable: Sin esteganografía' : '✖ No confiable'}
+            <p className="analysis-result">
+              {image.suspicious_blocks === 0
+                ? '✔ Sin datos ocultos detectados'
+                : `✖ Bloques sospechosos detectados: ${image.suspicious_blocks}`}
             </p>
             <button
               className="delete-button"
