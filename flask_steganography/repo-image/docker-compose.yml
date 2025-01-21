@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app:
+    image: repo-app:latest  # Usa la imagen existente
+    ports:
+      - "3000:3000"         # Mapea el puerto 3000 del contenedor al 3000 de tu máquina
+    volumes:
+      - .:/app              # Monta el código fuente local en el contenedor
+      - /app/node_modules   # Evita conflictos con node_modules en el host
+    command: npm start      # Comando para iniciar la aplicación
